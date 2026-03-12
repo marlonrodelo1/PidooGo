@@ -1,0 +1,13 @@
+{
+  "appId": "com.pidoo.admin",
+  "appName": "Pidoo Socio",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 5000,
+      "launchAutoHide": true,
+      "backgroundColor": "#0B1220",
+      "showSpinner": false
+    }
+  }
+}
