@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  pidoogo:
+    build: .
+    container_name: pidoogo-app
+    restart: unless-stopped
+    ports:
+      - "3002:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=dokploy-network"
+      - "traefik.http.routers.pidoogo.rule=Host(`pidoogo.foodplace.es`)"
+      - "traefik.http.routers.pidoogo.entrypoints=websecure"
+      - "traefik.http.routers.pidoogo.tls=true"
+      - "traefik.http.routers.pidoogo.tls.certresolver=letsencrypt"
+      - "traefik.http.services.pidoogo.loadbalancer.server.port=80"
+
+networks:
+  dokploy-network:
+    external: true
